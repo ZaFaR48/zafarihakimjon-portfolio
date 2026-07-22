@@ -1,0 +1,74 @@
+.enterprise {
+  background: #fff;
+}
+
+.businessTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.businessTags span {
+  border: 1px solid var(--line);
+  padding: 10px 14px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin: 46px 0 28px;
+}
+
+.socials a {
+  width: 104px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 12px;
+}
+
+.socials i {
+  width: 58px;
+  height: 58px;
+  border: 1px solid #ffffff88;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  transition: 0.2s;
+}
+
+.socials a:hover i,
+.socials a:focus-visible i {
+  background: white;
+  color: var(--blue);
+  transform: translateY(-3px);
+}
+
+.phoneNumber {
+  display: inline-block;
+  color: white;
+  font: 400 25px Georgia, serif;
+  border-bottom: 1px solid #ffffff88;
+  padding-bottom: 7px;
+}
+
+@media (max-width: 650px) {
+  .socials {
+    gap: 10px;
+  }
+
+  .socials a {
+    width: 72px;
+  }
+}
