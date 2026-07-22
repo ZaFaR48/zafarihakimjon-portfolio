@@ -72,3 +72,42 @@
     width: 72px;
   }
 }
+
+/* Branded contact actions */
+.socials { gap: 28px; margin: 52px 0 32px; }
+.socials a { width: 112px; gap: 13px; font-size: 13px; font-weight: 600; }
+.socials i {
+  width: 68px;
+  height: 68px;
+  border: 0;
+  background: #fff;
+  box-shadow: 0 12px 30px #002d8a55;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.socials svg { width: 31px; height: 31px; fill: currentColor; }
+.socials .telegram i { color: #229ed9; }
+.socials .whatsapp i { color: #25d366; }
+.socials .gmail i { color: #ea4335; }
+.socials .call i { color: #0b52c7; }
+.socials a:hover i,
+.socials a:focus-visible i {
+  background: #fff;
+  transform: translateY(-7px) scale(1.06);
+  box-shadow: 0 18px 38px #002d8a77;
+}
+.phoneNumber {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(25px, 3vw, 38px);
+  padding: 10px 5px 9px;
+  transition: opacity .2s ease;
+}
+.phoneNumber svg { width: 24px; height: 24px; fill: currentColor; }
+.phoneNumber:hover { opacity: .82; }
+@media (max-width: 650px) {
+  .socials { gap: 12px; }
+  .socials a { width: 76px; font-size: 11px; }
+  .socials i { width: 58px; height: 58px; }
+  .socials svg { width: 27px; height: 27px; }
+}
