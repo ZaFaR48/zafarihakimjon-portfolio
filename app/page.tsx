@@ -50,12 +50,19 @@ const content = {
   }
 } as const;
 
+function SocialIcon({ kind }: { kind: "telegram" | "whatsapp" | "gmail" | "phone" }) {
+  if (kind === "telegram") return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.7 3.4 18.6 20c-.2 1.2-.9 1.5-1.9.9l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 9-8.1c.4-.4-.1-.6-.6-.2L6.2 13.8l-4.7-1.5c-1-.3-1-1 .2-1.5L20 3.8c.9-.3 1.9.2 1.7-.4Z"/></svg>;
+  if (kind === "whatsapp") return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a9.7 9.7 0 0 0-8.3 14.7L2.4 22l5.4-1.4A9.8 9.8 0 1 0 12 2Zm0 17.7c-1.5 0-3-.4-4.2-1.2l-3.2.8.9-3.1A7.8 7.8 0 1 1 12 19.7Zm4.3-5.8c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.2l-.8 1c-.1.2-.3.2-.5.1-1.5-.7-2.5-1.4-3.5-3.1-.3-.5.3-.5.8-1.6.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.5-.4-.7-.4h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 1.8.8 2.6.8 3.5.7 1.1-.2 1.6-1.3 1.8-1.8.2-.4.2-.8.1-.9-.2-.2-.4-.3-.6-.4Z"/></svg>;
+  if (kind === "gmail") return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 5.5h17v13h-17z" fill="none" stroke="currentColor" strokeWidth="2"/><path d="m4.5 7 7.5 5.7L19.5 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round"/></svg>;
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.8 9.8 7 8.2 9.2c1.2 2.5 3.1 4.4 5.6 5.6l2.2-1.6 4.2 3.2c.5.4.7 1 .4 1.6-.8 1.9-2.4 3-4.5 3C9 21 3 15 3 7.9c0-2.1 1.1-3.7 3-4.5.6-.3 1.2-.1 1.6.4Z"/></svg>;
+}
+
 function Diagram() { return <div className="diagram" aria-hidden="true"><div className="grid"/><i className="route r1"/><i className="route r2"/><i className="route r3"/><b className="dot d1"/><b className="dot d2"/><b className="dot d3"/><b className="dot d4"/><div className="antenna"><em/><span/><span/></div><div className="rack">SERVER<i/><i/><i/><i/></div><div className="db">DATA</div><small>INFRASTRUCTURE / NETWORK / INTELLIGENCE</small></div>; }
 
 export default function Home() {
-  const [lang, setLang] = useState<Lang>("tj"); const t = content[lang];
-  useEffect(() => { const saved = localStorage.getItem("portfolio-language") as Lang | null; if (saved && content[saved]) setLang(saved); }, []);
-  const choose = (value: Lang) => { setLang(value); localStorage.setItem("portfolio-language", value); document.documentElement.lang = value === "tj" ? "tg" : value; };
+  const [lang, setLang] = useState<Lang>("ru"); const t = content[lang];
+  useEffect(() => { const saved = localStorage.getItem("portfolio-language-v2") as Lang | null; if (saved && content[saved]) setLang(saved); }, []);
+  const choose = (value: Lang) => { setLang(value); localStorage.setItem("portfolio-language-v2", value); document.documentElement.lang = value === "tj" ? "tg" : value; };
   return <main id="top">
     <header><a className="brand" href="#top">ZAFARI HAKIMJON</a><nav>{t.nav.map((x,i)=><a key={x} href={["#about","#experience","#expertise","#projects","#contact"][i]}>{x}</a>)}</nav><div className="headerTools"><div className="languages" aria-label="Language">{(["tj","ru","en"] as Lang[]).map(x=><button key={x} className={lang===x?"active":""} onClick={()=>choose(x)}>{x.toUpperCase()}</button>)}</div><a className="talk" href="mailto:zamona08@gmail.com">{t.talk}</a></div></header>
     <section className="hero"><div className="heroText"><p className="eyebrow">{t.location}</p><h1>{t.title}</h1><div className="accent"/><p className="lead">{t.lead}</p><div className="actions"><a className="btn blue" href="#experience">{t.view} <b>→</b></a><a className="under" href="#contact">{t.contact}</a></div><div className="stats"><div><strong>1,350+</strong><span>{t.stats[0]}</span></div><div><strong>150+</strong><span>{t.stats[1]}</span></div><div><strong>50+</strong><span>{t.stats[2]}</span></div></div></div><Diagram/></section>
@@ -65,7 +72,7 @@ export default function Home() {
     <section className="section projects" id="projects"><p className="kicker">{t.sections[3]}</p>{t.projects.map((p,i)=><article key={p[0]}><span>0{i+1}</span><h3>{p[0]}</h3><p>{p[1]}</p><b>{p[2]}</b></article>)}</section>
     <section className="section enterprise"><p className="kicker">{t.sections[4]}</p><div className="two"><h2>{t.businessTitle}</h2><div className="copy"><p>{t.business[0]}</p><p>{t.business[1]}</p><div className="businessTags"><span>Own server</span><span>Websites</span><span>CCTV retail</span><span>Computers</span><span>Alif Shop</span><span>LakLak</span></div></div></div></section>
     <section className="section"><p className="kicker">{t.sections[5]}</p><div className="cards">{t.cards.map(c=><article key={c[0]}><small>{c[0]}</small><h3>{c[1]}</h3><p>{c[2]}</p></article>)}</div></section>
-    <section className="contact" id="contact"><p className="eyebrow">{t.contactKicker}</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><div className="socials" aria-label="Contact Zafari Hakimjon"><a href="https://t.me/ZafarKarimovv" target="_blank" rel="noreferrer"><i>✈</i><span>Telegram</span></a><a href="https://wa.me/992878484808" target="_blank" rel="noreferrer"><i>WA</i><span>WhatsApp</span></a><a href="mailto:zamona08@gmail.com"><i>@</i><span>Email</span></a><a href="tel:+992878484808"><i>☎</i><span>{t.call}</span></a></div><a className="phoneNumber" href="tel:+992878484808">+992 878 48 48 08</a></section>
+    <section className="contact" id="contact"><p className="eyebrow">{t.contactKicker}</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><div className="socials" aria-label="Contact Zafari Hakimjon"><a className="telegram" href="https://t.me/ZafarKarimovv" target="_blank" rel="noreferrer"><i><SocialIcon kind="telegram"/></i><span>Telegram</span></a><a className="whatsapp" href="https://wa.me/992878484808" target="_blank" rel="noreferrer"><i><SocialIcon kind="whatsapp"/></i><span>WhatsApp</span></a><a className="gmail" href="mailto:zamona08@gmail.com"><i><SocialIcon kind="gmail"/></i><span>Gmail</span></a><a className="call" href="tel:+992878484808"><i><SocialIcon kind="phone"/></i><span>{t.call}</span></a></div><a className="phoneNumber" href="tel:+992878484808"><SocialIcon kind="phone"/><span>+992 878 48 48 08</span></a></section>
     <footer><a className="brand" href="#top">ZAFARI HAKIMJON</a><p>IT Infrastructure · DevOps · Network · AI</p><p>© 2026 Dushanbe, Tajikistan</p></footer>
   </main>;
 }
